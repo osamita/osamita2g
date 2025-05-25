@@ -8,6 +8,33 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    .slider {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      height: 400px;
+    }
+
+    .slides {
+      display: flex;
+      width: 200%;
+      animation: slide 8s infinite;
+    }
+
+    .slides img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      45% { transform: translateX(0); }
+      55% { transform: translateX(-100%); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -75,3 +102,4 @@
   </footer>
 </body>
 </html>
+   
