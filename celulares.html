@@ -1,45 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tienda de Celulares</title>
-  <link rel="stylesheet" href="estilos.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    .slider {
-      width: 100%;
-      overflow: hidden;
-      position: relative;
-      height: 400px;
-    }
-
-    .slides {
-      display: flex;
-      width: 200%;
-      animation: slide 8s infinite;
-    }
-
-    .slides img {
-      width: 100%;
-      height: 400px;
-      object-fit: cover;
-    }
-
-    @keyframes slide {
-      0% { transform: translateX(0); }
-      45% { transform: translateX(0); }
-      55% { transform: translateX(-100%); }
-      100% { transform: translateX(-100%); }
-    }
-  </style>
+  <link rel="stylesheet" href="estilos.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
 </head>
 <body>
   <header>
     <nav>
-      <div class="logo">CelularesPro</div>
+      <div class="logo">
+        <img src="img/logo.png" alt="CelularesPro" />
+      </div>
       <ul class="menu">
         <li><a href="#nosotros">Nosotros</a></li>
         <li><a href="#productos">Productos</a></li>
@@ -50,8 +25,14 @@
 
   <section class="slider">
     <div class="slides">
-      <img src="img/slide1.jpg" alt="Slide 1">
-      <img src="img/slide2.jpg" alt="Slide 2">
+      <img class="slide active" src="img/slide1.jpg" alt="Slide 1">
+      <img class="slide" src="img/slide2.jpg" alt="Slide 2">
+    </div>
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+    <div class="dots">
+      <span class="dot active" data-index="0"></span>
+      <span class="dot" data-index="1"></span>
     </div>
   </section>
 
@@ -63,7 +44,6 @@
   <section id="productos" class="productos">
     <h2>Nuestros Productos</h2>
     <div class="grid-productos">
-      <!-- Aquí puedes duplicar estas tarjetas según productos -->
       <div class="producto">
         <img src="img/celular1.jpg" alt="Celular 1">
         <h3>Samsung Galaxy S23</h3>
@@ -100,6 +80,49 @@
       </div>
     </div>
   </footer>
+
+  <a href="https://wa.me/5491123456789" class="whatsapp-float" target="_blank" aria-label="Chat en WhatsApp">
+    <img src="img/whatsapp-icon.png" alt="WhatsApp">
+  </a>
+
+  <script>
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    const prev = document.querySelector('.prev');
+    const next = document.querySelector('.next');
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove('active');
+        dots[i].classList.remove('active');
+        if (i === index) {
+          slide.classList.add('active');
+          dots[i].classList.add('active');
+        }
+      });
+      slideIndex = index;
+    }
+
+    function nextSlide() {
+      slideIndex = (slideIndex + 1) % slides.length;
+      showSlide(slideIndex);
+    }
+
+    function prevSlide() {
+      slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+      showSlide(slideIndex);
+    }
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        showSlide(parseInt(dot.dataset.index));
+      });
+    });
+
+    prev.addEventListener('click', prevSlide);
+    next.addEventListener('click', nextSlide);
+    setInterval(nextSlide, 6000);
+  </script>
 </body>
 </html>
-   
